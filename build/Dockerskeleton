@@ -1,6 +1,6 @@
 FROM alpine:edge
 
-RUN apk add libstdc++ libgcc gtk+3.0 alsa-lib dbus-glib libxt
+RUN apk add libstdc++ libgcc gtk+3.0 alsa-lib dbus-glib libxt ttf-dejavu
 
 RUN mkdir /browser
 COPY RELEASE /browser/palemoon.tar.xz
