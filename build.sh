@@ -1,5 +1,6 @@
 #!/bin/bash
-if [ ! -f /path/to/file ]
+cd "$(dirname "$0")"
+if [ ! -f BUILD ]
 then
     echo -en 0 > BUILD
 fi
