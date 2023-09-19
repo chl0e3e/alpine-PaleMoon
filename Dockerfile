@@ -5,14 +5,14 @@ RUN apk add dumb-init musl libc6-compat linux-headers build-base bash git ca-cer
 RUN mkdir /workspace
 WORKDIR /workspace
 
-COPY openssl-1.1.1v-r0.apk /workspace/openssl-1.1.1v-r0.apk
-COPY openssl-dev-1.1.1v-r0.apk /workspace/openssl-dev-1.1.1v-r0.apk
-COPY libssl1.1-1.1.1v-r0.apk /workspace/libssl1.1-1.1.1v-r0.apk
-COPY libcrypto1.1-1.1.1v-r0.apk /workspace/libcrypto1.1-1.1.1v-r0.apk
+COPY packages/openssl-1.1.1v-r0.apk /workspace/openssl-1.1.1v-r0.apk
+COPY packages/openssl-dev-1.1.1v-r0.apk /workspace/openssl-dev-1.1.1v-r0.apk
+COPY packages/libssl1.1-1.1.1v-r0.apk /workspace/libssl1.1-1.1.1v-r0.apk
+COPY packages/libcrypto1.1-1.1.1v-r0.apk /workspace/libcrypto1.1-1.1.1v-r0.apk
 
 RUN apk add openssl-1.1.1v-r0.apk openssl-dev-1.1.1v-r0.apk libssl1.1-1.1.1v-r0.apk libcrypto1.1-1.1.1v-r0.apk
 
-COPY Python-2.7.18.tgz /workspace/Python-2.7.18.tgz
+COPY sources/Python-2.7.18.tgz /workspace/Python-2.7.18.tgz
 RUN tar xvf Python-2.7.18.tgz
 
 WORKDIR /workspace/Python-2.7.18
@@ -23,7 +23,7 @@ RUN make install
 
 WORKDIR /workspace
 
-COPY dbus-python-1.2.18.tar.gz /workspace/dbus-python-1.2.18.tar.gz
+COPY sources/dbus-python-1.2.18.tar.gz /workspace/dbus-python-1.2.18.tar.gz
 
 RUN tar xvf dbus-python-1.2.18.tar.gz
 
@@ -36,9 +36,9 @@ RUN make install
 
 WORKDIR /workspace
 
-COPY autoconf2.13-2.13-r1.apk /workspace/autoconf2.13-2.13-r1.apk
-COPY gconf-3.2.6-r5.apk /workspace/gconf-3.2.6-r5.apk
-COPY gconf-dev-3.2.6-r5.apk /workspace/gconf-dev-3.2.6-r5.apk
+COPY packages/autoconf2.13-2.13-r1.apk /workspace/autoconf2.13-2.13-r1.apk
+COPY packages/gconf-3.2.6-r5.apk /workspace/gconf-3.2.6-r5.apk
+COPY packages/gconf-dev-3.2.6-r5.apk /workspace/gconf-dev-3.2.6-r5.apk
 RUN apk add autoconf2.13-2.13-r1.apk gconf-dev-3.2.6-r5.apk gconf-3.2.6-r5.apk gtk+3.0 gtk+3.0-dev gtk+2.0 gtk+2.0-dev dbus-glib desktop-file-utils libxt alsa-lib startup-notification unzip zip yasm libpulse gcc alsa-lib-dev pulseaudio-dev libxt-dev
 
 RUN git clone --recursive https://repo.palemoon.org/MoonchildProductions/Pale-Moon.git
