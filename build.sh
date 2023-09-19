@@ -2,11 +2,11 @@
 cd "$(dirname "$0")"
 if [ ! -f BUILD ]
 then
-    echo -en 0 > BUILD
+    echo -n 0 > BUILD
 fi
 n=$(cat BUILD)
 BUILD=$(( n + 1 ))
-echo -en $build > BUILD
+echo -n $BUILD > BUILD
 
 IMAGE="palemoon-$BUILD"
 docker build --no-cache -t $IMAGE .
