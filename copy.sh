@@ -1,19 +1,36 @@
 #!/bin/bash
-docker build -t palemoon .
+if [ ! -f /path/to/file ]
+then
+    echo -en 0 > BUILD
+fi
+n=$(cat BUILD)
+BUILD=$(( n + 1 ))
+echo -en $build > BUILD
 
-JSON=$(docker run palemoon | tr --delete '\n')
+IMAGE="palemoon-$BUILD"
+docker build --no-cache -t $IMAGE .
+
+JSON=$(docker run $IMAGE | tr --delete '\n')
 ARCHIVE=$(echo $JSON | sed 's/json/tar.xz/')
 
 mkdir builds || echo "Builds folder exists"
 
-echo "Creating `palemoon` container"
-id=$(docker create palemoon)
+echo "Creating '$IMAGE' container"
+echo ""
+id=$(docker create $IMAGE)
+echo ""
 echo "Copying release archive and version information"
 echo "JSON    - $JSON"
 echo "ARCHIVE - $ARCHIVE"
 docker cp $id:$JSON builds/ && echo "Copied JSON"
 docker cp $id:$ARCHIVE builds/ && echo "Copied archive"
-echo "Removing `palemoon` container"
-docker rm -v $id && echo "Container `palemoon` removed"
+echo "Copy complete"
+echo ""
+echo "Removing '$IMAGE' container"
+docker kill $id
+docker rm -v $id && echo "Container 'palemoon' removed"
+
+echo "Removing '$IMAGE' image"
+docker image rm $IMAGE
 
 basename $ARCHIVE > builds/latest && echo "Build added to builds/ folder and version updated" 
