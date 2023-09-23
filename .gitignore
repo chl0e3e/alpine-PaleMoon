@@ -1,0 +1,7 @@
+builds/
+discs/
+*.tar.xz
+*.qcow2
+*.vmdk
+*.vdi
+*.vhd
