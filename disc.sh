@@ -53,3 +53,6 @@ set -x
 ./d2vm build "$REAL_PROJECT_PATH" -f "$REAL_PROJECT_PATH/Dockerfile" -o "$DISC_PATH_WITHOUT_EXTENSION.vdi" -s 500m
 ./d2vm build "$REAL_PROJECT_PATH" -f "$REAL_PROJECT_PATH/Dockerfile" -o "$DISC_PATH_WITHOUT_EXTENSION.raw" -s 500m
 ./d2vm build "$REAL_PROJECT_PATH" -f "$REAL_PROJECT_PATH/Dockerfile" -o "$DISC_PATH_WITHOUT_EXTENSION.vmdk" -s 500m
+
+echo "Generating ISO - $DISC_PATH_WITHOUT_EXTENSION.iso"
+genisoimage -v -J -r -V MSVSMd -o "$DISC_PATH_WITHOUT_EXTENSION.iso" "$DISC_PATH_WITHOUT_EXTENSION.raw"
