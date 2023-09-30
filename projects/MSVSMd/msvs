@@ -1,9 +1,6 @@
 #!/sbin/openrc-run
 
-# Copyright (c) Natanael Copa
-# This code is licensed under BSD-2-Clause
-
-description="Sets the hostname of the machine."
+description="Starts the /www HTTP server."
 
 depend() {
 	need net
@@ -12,5 +9,6 @@ depend() {
 }
 
 start() {
-	/usr/bin/python /scripts/MSVS.py
+        /usr/bin/python /scripts/MSVS.py
+	nohup /usr/bin/python -m http.server --directory /www 80 &
 }

@@ -1,6 +1,6 @@
 FROM alpine:edge
 
-RUN apk add libstdc++ libgcc gtk+3.0 alsa-lib dbus-glib libxt ttf-dejavu python3 xvfb xdotool ifupdown-ng openrc
+RUN apk add libstdc++ libgcc gtk+3.0 alsa-lib dbus-glib libxt ttf-dejavu python3 xvfb xdotool ifupdown-ng openrc 7zip
 
 RUN mkdir /browser
 COPY palemoon.tar.xz /browser/palemoon.tar.xz
@@ -18,6 +18,14 @@ WORKDIR /scripts
 COPY src/MSVS.py /scripts/MSVS.py
 COPY src/xvfbwrapper.py /scripts/xvfbwrapper.py
 COPY src/init.sh /scripts/init.sh
+
+RUN mkdir /www
+
+RUN echo "* */12 * * * /usr/bin/python /scripts/MSVS.py >/dev/null 2>&1" >> /etc/crontab
+
 COPY msvs /etc/init.d/msvs
+RUN chmod +x /etc/init.d/msvs
 
 RUN rc-update add msvs sysinit
+
+ENTRYPOINT echo "Setup complete"

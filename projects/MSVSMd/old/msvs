@@ -1,0 +1,16 @@
+#!/sbin/openrc-run
+
+# Copyright (c) Natanael Copa
+# This code is licensed under BSD-2-Clause
+
+description="Sets the hostname of the machine."
+
+depend() {
+	need net
+	use dns logger
+	want nginx
+}
+
+start() {
+	/usr/bin/python /scripts/MSVS.py
+}

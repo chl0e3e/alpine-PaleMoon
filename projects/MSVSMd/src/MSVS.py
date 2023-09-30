@@ -58,6 +58,7 @@ while attempts != 30:
             print("Searching for installer")
             if os.path.exists(installer_path):
                 print("Installer found!")
+                os.system("7z -y x -o/www/ /tmp/VisualStudioSetup.exe")
                 break_all = True
                 break
             time.sleep(5)
@@ -65,7 +66,14 @@ while attempts != 30:
             break
     print("Waiting for browser - attempt %d" % attempts)
     time.sleep(attempts)
-    for window_id in get_all_windows():
+    try:
+        print("Polling for browser title")
+        windows = get_all_windows()
+    except Exception as e:
+        attempts = attempts + 1
+        print("Unexpected error - Trying again soon - %s" % str(e))
+        continue
+    for window_id in windows:
         window_id = window_id.strip()
         if window_id.isdigit():
      #       print("Window found - " + window_id)

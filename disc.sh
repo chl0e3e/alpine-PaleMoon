@@ -51,5 +51,5 @@ DISC_PATH_WITHOUT_EXTENSION=$(realpath "discs/$DISC_NAME")
 set -x 
 ./d2vm build "$REAL_PROJECT_PATH" -f "$REAL_PROJECT_PATH/Dockerfile" -o "$DISC_PATH_WITHOUT_EXTENSION.qcow2" -s 500m
 ./d2vm build "$REAL_PROJECT_PATH" -f "$REAL_PROJECT_PATH/Dockerfile" -o "$DISC_PATH_WITHOUT_EXTENSION.vdi" -s 500m
-./d2vm build "$REAL_PROJECT_PATH" -f "$REAL_PROJECT_PATH/Dockerfile" -o "$DISC_PATH_WITHOUT_EXTENSION.vhd" -s 500m
+./d2vm build "$REAL_PROJECT_PATH" -f "$REAL_PROJECT_PATH/Dockerfile" -o "$DISC_PATH_WITHOUT_EXTENSION.raw" -s 500m
 ./d2vm build "$REAL_PROJECT_PATH" -f "$REAL_PROJECT_PATH/Dockerfile" -o "$DISC_PATH_WITHOUT_EXTENSION.vmdk" -s 500m
